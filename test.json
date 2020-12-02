@@ -1,0 +1,84 @@
+[
+    {
+        "display_price": "$123.00",
+        "is_product_available_in_currency": true,
+        "backorderable": false,
+        "images": [
+            {
+                "alt": "test",
+                "url_product": "/rails/active_storage/representations/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--be540b67ac20c186deb6c26ce06b692786fdbe94/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTWpRd2VESTBNRDRHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--595abfb538c6889b88b5cd9a4538353c7eb0bee1/ao-khoac-du-nam-pull-bear-dep-co-non-3.jpg"
+            }
+        ],
+        "option_values": [],
+        "id": 1537,
+        "sku": "123",
+        "price": "123.0",
+        "in_stock": false,
+        "purchasable": false
+    },
+    {
+        "display_price": "$123.00",
+        "is_product_available_in_currency": true,
+        "backorderable": true,
+        "images": [
+            {
+                "alt": "",
+                "url_product": "/rails/active_storage/representations/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--990cdb8b7317a5854314f5bc03b62d2bbd36721b/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTWpRd2VESTBNRDRHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--595abfb538c6889b88b5cd9a4538353c7eb0bee1/5spOiC.jpg"
+            },
+            {
+                "alt": "",
+                "url_product": "/rails/active_storage/representations/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7c5f27330327f4846254316582ad788c3ed419f3/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTWpRd2VESTBNRDRHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--595abfb538c6889b88b5cd9a4538353c7eb0bee1/ao-khoac-du-nam-pull-bear-dep-co-non-3.jpg"
+            }
+        ],
+        "option_values": [
+            {
+                "id": 2,
+                "name": "purple",
+                "presentation": "#800080"
+            },
+            {
+                "id": 21,
+                "name": "midi",
+                "presentation": "Midi"
+            },
+            {
+                "id": 24,
+                "name": "s",
+                "presentation": "S"
+            }
+        ],
+        "id": 1538,
+        "sku": "12",
+        "price": "123.0",
+        "in_stock": false,
+        "purchasable": true
+    },
+    {
+        "display_price": "$100,000.00",
+        "is_product_available_in_currency": true,
+        "backorderable": true,
+        "images": [],
+        "option_values": [
+            {
+                "id": 6,
+                "name": "green",
+                "presentation": "#228C22"
+            },
+            {
+                "id": 21,
+                "name": "midi",
+                "presentation": "Midi"
+            },
+            {
+                "id": 24,
+                "name": "s",
+                "presentation": "S"
+            }
+        ],
+        "id": 1540,
+        "sku": "",
+        "price": "100000.0",
+        "in_stock": false,
+        "purchasable": true
+    }
+]

@@ -1,0 +1,202 @@
+@extends('admin.layouts.app')
+
+@section('title', __('Edit :model', ['model' => $variant->sku]))
+
+@section('page-header')
+    <x-page-header>
+        <x-slot name='title'>
+            <h4><i class="icon-plus-circle2 icon-2x mr-2"></i> <span class="font-weight-semibold">{{ __('Edit :model', ['model' => $variant->name]) }}</span></h4>
+        </x-slot>
+        {{ Breadcrumbs::render('products.variants.edit', $variant, $product) }}
+    </x-page-header>
+@stop
+
+@push('js')
+@endpush
+@section('page-content')
+
+    <!-- Inner container -->
+    <form action="{{ route('products.variants.update', ['product' => $product, 'variant' => $variant]) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="d-flex align-items-start flex-column flex-md-row">
+
+            <!-- Left content -->
+            <div class="w-100 order-2 order-md-1 left-content">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <x-collapse-card>
+                            <fieldset>
+                                <legend class="font-weight-semibold text-uppercase font-size-sm">
+                                    {{ __('General') }}
+                                    <a class="text-default" data-toggle="collapse" data-target="#general">
+                                        <i class="icon-circle-down2"></i>
+                                    </a>
+                                </legend>
+
+                                <div class="collapse show" id="general">
+                                    <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label text-lg-right" for="tax_category_id">{{ __('Tax Category') }}</label>
+                                        <div class="col-lg-10">
+                                            <select name="tax_category_id" id="tax_category_id" class="form-control js-select2" data-placeholder="{{ __('Select Tax Category') }}">
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <x-text-field
+                                        name="sku"
+                                        :label="__('SKU')"
+                                        required
+                                        :value="$variant->sku"
+                                    >
+                                    </x-text-field>
+
+                                    <x-text-field
+                                        name="cost_price"
+                                        :label="__('Cost Price')"
+                                        :value="$variant->cost_price"
+                                    >
+                                    </x-text-field>
+                                    <x-text-field
+                                        name="price"
+                                        :label="__('Price')"
+                                        required
+                                        :value="$variant->priceMain->amount"
+                                    >
+                                    </x-text-field>
+
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend class="font-weight-semibold text-uppercase font-size-sm">
+                                    {{ __('Option') }}
+                                    <a class="text-default" data-toggle="collapse" data-target="#option">
+                                        <i class="icon-circle-down2"></i>
+                                    </a>
+                                </legend>
+                                <div class="collapse show" id="option">
+                                    @foreach($options as $option)
+                                        @php
+                                            $selectedValue = $variant->optionValues->firstWhere('option_type_id', $option->id);
+                                        @endphp
+                                        <div class="form-group row">
+
+                                            <label class="col-lg-2 col-form-label text-lg-right" for="option_{{ $option->hash_key }}">
+                                                <span class="text-danger">*</span>
+                                                {{ $option->presentation }}
+                                            </label>
+
+                                            <div class="col-lg-10">
+                                                <select name="option_values[{{ $option->hash_key }}]" id="option_{{ $option->hash_key }}" class="form-control js-select2 {{ $errors->has('option_values') ? 'border-danger' : null}}" data-placeholder="{{ __('Select Option') }}">
+                                                    <option></option>
+                                                    @foreach($option->values as $value)
+                                                        @empty($selectedValue)
+                                                            <option value="{{ $value->hash_key }}">{{ $value->presentation }}</option>
+                                                        @else
+                                                            <option value="{{ $value->hash_key }}" {{ $selectedValue->id == $value->id ? 'selected' : null }}>{{ $value->presentation }}</option>
+                                                        @endempty
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('option_values'))
+                                                    <span class="form-text text-danger">
+                                                        {{ $errors->first('option_values') }}
+                                                    </span>
+                                                @endif
+                                                @if ($errors->has('option_values.'.$option->hash_key))
+                                                    <span class="form-text text-danger">
+                                                        {{ $errors->first('option_values.'.$option->hash_key) }}
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend class="font-weight-semibold text-uppercase font-size-sm">
+                                    {{ __('Shipping') }}
+                                    <a class="text-default" data-toggle="collapse" data-target="#shipping">
+                                        <i class="icon-circle-down2"></i>
+                                    </a>
+                                </legend>
+
+                                <div class="collapse show" id="shipping">
+                                    <x-text-field
+                                        name="weight"
+                                        :label="__('Weight')"
+                                        :value="$variant->weight"
+                                    >
+                                    </x-text-field>
+                                    <x-text-field
+                                        name="height"
+                                        :label="__('Height')"
+                                        :value="$variant->height"
+                                    >
+                                    </x-text-field>
+                                    <x-text-field
+                                        name="width"
+                                        :label="__('Width')"
+                                        :value="$variant->width"
+                                    >
+                                    </x-text-field>
+                                    <x-text-field
+                                        name="depth"
+                                        :label="__('Depth')"
+                                        :value="$variant->depth"
+                                    >
+                                    </x-text-field>
+                                </div>
+                            </fieldset>
+
+                        </x-collapse-card>
+                        <div class="d-flex justify-content-center align-items-center action" id="action-form">
+                            <a href="{{ url()->previous() }}" class="btn btn-light"><i class="icon-close2 mr-2"></i>{{ __('Cancel') }}</a>
+                            <div class="btn-group ml-3">
+                                <button class="btn bg-success btn-block" data-loading><i class="mi-save mr-2"></i>{{ __('Save') }}</button>
+                                <button class="btn bg-success dropdown-toggle" data-toggle="dropdown"></button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="javascript:void(0)" class="dropdown-item submit-type" data-submit_type="submit_and_back">{{ __('Save And Close') }}</a>
+                                    <a href="javascript:void(0)" class="dropdown-item submit-type" data-submit_type="submit_and_create">{{ __('Save And Create New') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /left content -->
+
+
+            <!-- Right sidebar component -->
+            <div class="sidebar-secondary sidebar sidebar-light sidebar-component sidebar-component-right order-1 order-md-2 sidebar-expand-md">
+
+                <!-- Sidebar content -->
+                <div class="sidebar-content">
+                    <!-- Actions -->
+                    <div class="card">
+                        <div class="card-header bg-transparent header-elements-inline">
+                            <span class="text-uppercase font-size-sm font-weight-semibold">{{ __('Publish') }}</span>
+                            <div class="header-elements">
+                                <div class="list-icons">
+                                    <a class="list-icons-item" data-action="collapse"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                        </div>
+                    </div>
+                    <!-- /actions -->
+
+                </div>
+                <!-- /sidebar content -->
+
+            </div>
+            <!-- /right sidebar component -->
+
+        </div>
+        <!-- /inner container -->
+    </form>
+
+@stop

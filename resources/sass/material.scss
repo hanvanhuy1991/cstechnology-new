@@ -1,0 +1,33 @@
+@import "layouts/layout_1/material/compile/bootstrap";
+@import "layouts/layout_1/material/compile/bootstrap_limitless";
+@import "layouts/layout_1/material/compile/components";
+@import "layouts/layout_1/material/compile/layout";
+@import "layouts/layout_1/material/compile/colors";
+@import "shared/icons/material/compile/styles";
+@import "shared/icons/fontawesome/compile/styles";
+@import "shared/icons/icomoon/compile/styles";
+@import '~jstree/dist/themes/default/style';
+@import "ohsnap";
+@import "loading";
+.cursor-wait {
+    cursor: wait;
+}
+
+.block {
+    display: block;
+}
+
+.modal {
+    &.fade {
+        .modal-dialog {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: 100ms ease-in-out;
+        }
+
+        &.in .modal-dialog {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+}
